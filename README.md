@@ -62,7 +62,7 @@ Animate[Graphics[{Black, Rotate[Disk[{0, y[t]}, {a, b}], phi[t]], Red,
 ```
 <img src="bouncing_ellipse.gif" width="500"/>
 
-## Symbolic computation for $h_{12}$ and $h_{22}(\phi_{i-1},\phi_{i})+h_{11}(\phi_{i},\phi_{i+1})$
+## Symbolic computation for $h_{12}(\phi_{i-1},\phi_{i})$ and $h_{22}(\phi_{i-1},\phi_{i})+h_{11}(\phi_{i},\phi_{i+1})$
 
 Mathematica code:
 ```mathematica
