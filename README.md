@@ -1,5 +1,5 @@
 # Numerical and symbolic computations for bouncing convex bodies
-Numerical and symbolic computations for the paper: Integrability and chaos in the bouncing convex body model.
+Numerical and symbolic computations for the paper: Xiaoming Zhang, Integrability and chaos in the bouncing convex body model. 2025.
 
 ## Verification of the formulas of the lowest point when rotating the ellipse and the eccentricity disk:
 Mathematica code for ellipse:
@@ -29,6 +29,40 @@ With[{r = 2, c = 1},
 ```
 
 <img src="rotate_circle.gif" width="500"/>
+
+Numerical simulations for bouncing ellipse:
+```mathematica
+ClearAll["Global`*"];
+m = 10; a = 2; b = 1.6; g = 10;
+J = 1/4  (a^2 + b^2)  m;
+G1[phi_] := ((-a^2 + b^2)  Cos[phi]  Sin[phi])/Sqrt[
+  b^2  Cos[phi]^2 + a^2  Sin[phi]^2];
+G2[phi_] := Sqrt[b^2  Cos[phi]^2 + a^2  Sin[phi]^2];
+(*impact condition*)
+H[y_, phi_] := y - G2[phi];
+(*impact rule*)
+impactrule[v0_, omega0_, 
+   phi0_] := {(G1[phi0]^2  m  v0 - J  (v0 + 2  G1[phi0]  omega0))/(J +
+       G1[phi0]^2  m), (J  omega0 - 
+      G1[phi0]  m  (2  v0 + G1[phi0]  omega0))/(J + G1[phi0]^2  m)};
+vy0 = 0; omega0 = 0;
+phi0 = 0.1;
+e = 830;
+y0 = (2 e - (vy0)^2 m - J  omega0^2)/(2 g m);
+{sol, data} = 
+  First /@ 
+   Reap[NDSolve[{y''[t] == -g, phi''[t] == 0, y[0] == y0, 
+      y'[0] == vy0, phi[0] == phi0, phi'[0] == omega0,
+      WhenEvent[
+       H[y[t], phi[t]] == 0, {state1 = y'[t]; state2 = phi'[t], 
+        Sow[{t, Mod[phi[t], 2 \[Pi]], y'[t]}], {y'[t], phi'[t]} -> 
+         impactrule[state1, state2, phi[t]]}]}, {y, phi}, {t, 0, 100},
+      MaxStepSize -> 0.01]];
+Animate[Graphics[{Black, Rotate[Disk[{0, y[t]}, {a, b}], phi[t]], Red,
+     Point[{0, y[t]}], Black, Line[{{-3, 0}, {3, 0}}]}, 
+   PlotRange -> {{-3, 3}, {-1, 12}}] /. sol, {t, 0, 30}]
+```
+<img src="bouncing_ellipse.gif" width="500"/>
 
 ## Symbolic computation for $h_{22}(\phi_{i-1},\phi_{i})+h_{11}(\phi_{i},\phi_{i+1})$
 
