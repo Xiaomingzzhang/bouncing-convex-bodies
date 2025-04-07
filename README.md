@@ -49,15 +49,13 @@ vy0 = 0; omega0 = 0;
 phi0 = 0.1;
 e = 830;
 y0 = (2 e - (vy0)^2 m - J  omega0^2)/(2 g m);
-{sol, data} = 
-  First /@ 
-   Reap[NDSolve[{y''[t] == -g, phi''[t] == 0, y[0] == y0, 
-      y'[0] == vy0, phi[0] == phi0, phi'[0] == omega0,
-      WhenEvent[
-       H[y[t], phi[t]] == 0, {state1 = y'[t]; state2 = phi'[t], 
-        Sow[{t, Mod[phi[t], 2 \[Pi]], y'[t]}], {y'[t], phi'[t]} -> 
-         impactrule[state1, state2, phi[t]]}]}, {y, phi}, {t, 0, 100},
-      MaxStepSize -> 0.01]];
+sol = NDSolve[{y''[t] == -g, phi''[t] == 0, y[0] == y0, y'[0] == vy0, 
+     phi[0] == phi0, phi'[0] == omega0,
+     WhenEvent[
+      H[y[t], phi[t]] == 0, {state1 = y'[t]; 
+       state2 = phi'[t], {y'[t], phi'[t]} -> 
+        impactrule[state1, state2, phi[t]]}]}, {y, phi}, {t, 0, 100}, 
+    MaxStepSize -> 0.01][[1]];
 Animate[Graphics[{Black, Rotate[Disk[{0, y[t]}, {a, b}], phi[t]], Red,
      Point[{0, y[t]}], Black, Line[{{-3, 0}, {3, 0}}]}, 
    PlotRange -> {{-3, 3}, {-1, 12}}] /. sol, {t, 0, 30}]
