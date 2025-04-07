@@ -11,8 +11,19 @@ With[{a = 2, b = 1},
        b^2  Cos[phi]^2 + a^2  Sin[phi]^2]}]}, 
    PlotRange -> {{-3, 3}, {-3, 3}}], {phi, 0, 2 Pi}]]
 ```
-![rotate_ellipse.gif](rotate_ellipse.gif)
 
-<video width="320" height="240" controls>
-  <source src="rotate_ellipse.mp4" type="video/mp4">
-</video>
+<video src="rotate_ellipse.mp4" width="450"  controls></video>
+
+Mathematica code for eccentricity circle:
+
+```mathematica
+With[{r = 2, c = 1},
+ Animate[
+  Graphics[{Rotate[Circle[{c, 0}, r], phi, {0, 0}], Black, 
+    PointSize[Large], Point[{0, 0}], 
+    Rotate[Point[{c, 0}], phi, {0, 0}], Red, PointSize[Large], 
+    Point[{c  Cos[phi], -r + c  Sin[phi]}]}, 
+   PlotRange -> {{-4, 4}, {-4, 4}}], {phi, 0, 2 Pi}]]
+```
+
+<video src="rotate_circle.mp4" width="450"  controls></video>
