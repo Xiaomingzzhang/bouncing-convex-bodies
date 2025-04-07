@@ -11,14 +11,8 @@ With[{a = 2, b = 1},
        b^2  Cos[phi]^2 + a^2  Sin[phi]^2]}]}, 
    PlotRange -> {{-3, 3}, {-3, 3}}], {phi, 0, 2 Pi}]]
 ```
-<html>
-<head>
-  <title>Test Video</title>
-</head>
-<body>
-  <video width="320" height="240" controls>
-    <source src="rotate_ellispe.mp4" type="video/mp4">
-  </video>
-</body>
-</html>
+![rotate_ellipse.gif](rotate_ellipse.gif)
 
+<video width="320" height="240" controls>
+  <source src="rotate_ellipse.mp4" type="video/mp4">
+</video>
