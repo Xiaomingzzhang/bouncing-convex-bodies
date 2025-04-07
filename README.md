@@ -62,7 +62,7 @@ Animate[Graphics[{Black, Rotate[Disk[{0, y[t]}, {a, b}], phi[t]], Red,
 ```
 <img src="bouncing_ellipse.gif" width="500"/>
 
-## Symbolic computation for $h_{22}(\phi_{i-1},\phi_{i})+h_{11}(\phi_{i},\phi_{i+1})$
+## Symbolic computation for $h_{12}$ and $h_{22}(\phi_{i-1},\phi_{i})+h_{11}(\phi_{i},\phi_{i+1})$
 
 Mathematica code:
 ```mathematica
@@ -88,6 +88,10 @@ h[phi0_, phi1_, e_] =
 T[phi0_, phi1_] := Sqrt[(
   B[phi0, phi1] + Sqrt[B[phi0, phi1]^2 - 4  A  CC[phi0, phi1]])/(2 A)]
   ;
+(*Main terms for h12*)
+Simplify[
+ Series[D[h[phi0, phi1, e], phi0, phi1], {e, 
+   Infinity, 2}], Assumptions -> e > 0 && g > 0 && m > 0 && J > 0]
 (*Main terms for h22+h11*)
 Simplify[
  Series[D[h[phi0, phi1, e] + h[phi1, phi2, e], phi1, phi1], {e, 
