@@ -1,6 +1,7 @@
 # Numerical simulations of bouncing convex bodies
+Numerical simulations for the paper: Integrability and chaos in the bouncing convex body model.
 
-## Verification of the formulas of the lowest point when rotating the ellipse and the eccentricity circle:
+## Verification of the formulas of the lowest point when rotating the ellipse and the eccentricity disk:
 Mathematica code for ellipse:
 ```mathematica
 With[{a = 2, b = 1},
@@ -12,9 +13,10 @@ With[{a = 2, b = 1},
    PlotRange -> {{-3, 3}, {-3, 3}}], {phi, 0, 2 Pi}]]
 ```
 
-<video src="rotate_ellipse.mp4" width="450"  controls></video>
+<img src="rotate_ellipse.gif" width="500"/>
 
-Mathematica code for eccentricity circle:
+
+Mathematica code for eccentricity disk:
 
 ```mathematica
 With[{r = 2, c = 1},
@@ -26,4 +28,11 @@ With[{r = 2, c = 1},
    PlotRange -> {{-4, 4}, {-4, 4}}], {phi, 0, 2 Pi}]]
 ```
 
-<video src="rotate_circle.mp4" width="450"  controls></video>
+<img src="rotate_circle.gif" width="500"/>
+
+## Symbolic computation for $h_{22}(\phi_{i-1},\phi_{i})+h_{11}(\phi_{i},\phi_{i+1})$
+
+Mathematica code:
+```mathematica
+
+```
